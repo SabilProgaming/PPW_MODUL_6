@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Dashboard</title>
+    <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌤️</text></svg>" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 4C8.25317 4 5.07693 6.72606 4.92098 10.2808C3.19811 11.1021 2 12.8527 2 14.8903C2 17.7232 4.31288 20 7.1417 20L16.3725 20C19.4696 20 22 17.5075 22 14.4086C22 12.2522 20.7729 10.3885 18.986 9.45568C18.4142 6.30972 15.4541 4 12 4Z" fill="currentColor"/>
+            </svg>
+            Peramal Cuaca Sabil
+        </div>
+        <div class="search-box">
+            <div class="search-box-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <input type="text" class="search-box-input" placeholder="Search location..." value="Jakarta">
+        </div>
+        <button class="gps-button" tabindex="1" title="Use my location">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M12 5V3M12 21V19M5 12H3M21 12H19M18 12C18 15.3137 15.3137 18 12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+        </button>
+        <button class="theme-button" tabindex="2" title="Toggle theme">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M5 11.4597C5 15.6241 8.4742 19 12.7598 19C16.0591 19 18.8774 16.9993 20 14.1783C19.1109 14.5841 18.1181 14.8109 17.0709 14.8109C13.2614 14.8109 10.1732 11.8101 10.1732 8.1084C10.1732 6.56025 10.7134 5.13471 11.6205 4C7.87502 4.5355 5 7.67132 5 11.4597Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Alert -->
+    <div class="alert" id="alert">
+        <div class="alert-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M3.35288 8.95043C4.00437 6.17301 6.17301 4.00437 8.95043 3.35288C10.9563 2.88237 13.0437 2.88237 15.0496 3.35288C17.827 4.00437 19.9956 6.17301 20.6471 8.95043C21.1176 10.9563 21.1176 13.0437 20.6471 15.0496C19.9956 17.827 17.827 19.9956 15.0496 20.6471C13.0437 21.1176 10.9563 21.1176 8.95044 20.6471C6.17301 19.9956 4.00437 17.827 3.35288 15.0496C2.88237 13.0437 2.88237 10.9563 3.35288 8.95043Z" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M12 15.5V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="9" r="0.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <div class="alert-message" id="alertMessage"></div>
+        <button class="alert-button" id="alertButton">Try Again</button>
+    </div>
+
+    <!-- Today Overview -->
+    <h2 class="heading">Today Overview</h2>
+
+    <div class="current-weather-section">
+        <!-- Current Weather Card -->
+        <div class="current-weather-card">
+            <img class="current-weather-icon loading dynamic-data" src="" alt="weather">
+            <div class="current-weather-temperature loading dynamic-data">&emsp;&emsp;</div>
+            <div class="current-weather-description loading dynamic-data">&emsp;&emsp;</div>
+            
+            <div class="current-location-container">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M12 21C16 17 20 13.4183 20 10C20 5.58172 16.4183 2 12 2C7.58172 2 4 5.58172 4 10C4 13.4183 8 17 12 21Z" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                <div class="current-location loading dynamic-data">&emsp;&emsp;&emsp;</div>
+            </div>
+            
+            <div class="current-date-container">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="6" width="18" height="15" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                    <path d="M3 10C3 8.11438 3 7.17157 3.58579 6.58579C4.17157 6 5.11438 6 7 6H17C18.8856 6 19.8284 6 20.4142 6.58579C21 7.17157 21 8.11438 21 10H3Z" fill="currentColor"/>
+                    <path d="M7 3L7 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M17 3L17 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <div class="current-date loading dynamic-data">&emsp;&emsp;&emsp;</div>
+            </div>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="info-card">
+            <div class="info-label">Wind Speed</div>
+            <div class="info-value wind-speed-value loading dynamic-data">&emsp;&emsp;</div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-label">Humidity</div>
+            <div class="info-value humidity-value loading dynamic-data">&emsp;&emsp;</div>
+        </div>
+
+        <!-- Hourly Forecast -->
+        <div class="hourly-weather-forecast-section">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Additional Info Cards -->
+    <div class="current-weather-section">
+        <div class="info-card">
+            <div class="info-label">Pressure</div>
+            <div class="info-value pressure-value loading dynamic-data">&emsp;&emsp;</div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-label">Sunrise</div>
+            <div class="info-value sunrise-value loading dynamic-data">&emsp;&emsp;</div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-label">Visibility</div>
+            <div class="info-value visibility-value loading dynamic-data">&emsp;&emsp;</div>
+        </div>
+
+        <div class="info-card">
+            <div class="info-label">Sunset</div>
+            <div class="info-value sunset-value loading dynamic-data">&emsp;&emsp;</div>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Next 5 Days -->
+    <h2 class="heading">Next 5 Days</h2>
+
+    <!-- Filter will be inserted here by JavaScript -->
+
+    <!-- Daily Forecast Section -->
+    <div class="daily-forecast-section">
+        <!-- Populated by JavaScript -->
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="attribution">Weather data provided by OpenWeather API</div>
+        <div style="margin-top: 10px; font-size: 12px;">
+            Created for Web Programming Practicum - Module 6: AJAX & Web Service
+        </div>
+    </div>
+
+    <!-- Top Button -->
+    <button class="top-button" tabindex="5" title="Scroll to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M7 14.5L12 9.5L17 14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
